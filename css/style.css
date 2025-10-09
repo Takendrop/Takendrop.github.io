@@ -352,10 +352,12 @@ footer {
 
 .game-featured-image {
     width: 100%;
-    max-width: 900px;
+    max-width: 100%;
     height: auto;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: block;
+    margin: 0 auto;
 }
 
 .image-caption {

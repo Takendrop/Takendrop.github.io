@@ -315,6 +315,72 @@ footer {
     font-style: italic;
 }
 
+/* Games Page Styles */
+.game-section {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.game-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.game-header h2 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.game-subtitle {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.game-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.game-image-container {
+    text-align: center;
+}
+
+.game-featured-image {
+    width: 100%;
+    max-width: 900px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.image-caption {
+    margin-top: 1rem;
+    font-style: italic;
+    color: #666;
+}
+
+.game-details h3 {
+    color: #667eea;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.game-details ul {
+    margin-left: 1.5rem;
+    line-height: 1.8;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .hamburger {

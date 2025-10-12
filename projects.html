@@ -58,61 +58,11 @@
         <p>&copy; 2025 Takendrop. All rights reserved.</p>
     </footer>
 
-    <!-- Load project data first -->
-    <script src="js/projects-data.js"></script>
-    
-    <!-- Then load the display logic -->
-    <script>
-        // Function to switch projects
-        function showProject(num) {
-            const project = projectsData[num];
-            const imgElement = document.getElementById('project-img');
-            const contentArea = document.getElementById('project-content');
-            
-            // Show the content area
-            contentArea.style.display = 'block';
-            
-            // Update title
-            document.getElementById('project-title').textContent = project.title;
-            
-            // Update descriptions with HTML formatting
-            document.getElementById('project-description1').innerHTML = formatText(project.description1);
-            document.getElementById('project-description2').innerHTML = formatText(project.description2);
-            
-            // Handle image or placeholder
-            if (project.image && project.image !== "") {
-                imgElement.src = project.image;
-                imgElement.style.display = 'block';
-            } else {
-                imgElement.src = 'https://via.placeholder.com/600x300/667eea/ffffff?text=' + encodeURIComponent(project.title);
-                imgElement.style.display = 'block';
-            }
-            
-            // Update active button
-            document.querySelectorAll('.project-btn').forEach((btn, index) => {
-                btn.classList.remove('active');
-                if (index === num - 1) {
-                    btn.classList.add('active');
-                }
-            });
-        }
-
-        // Helper function to format text with line breaks
-        function formatText(text) {
-            return text.split('\n').map(line => {
-                if (line.trim() === '') return '<br>';
-                if (line.match(/^[A-Z\s]+$/)) return `<h3>${line}</h3>`;
-                return `<p>${line}</p>`;
-            }).join('');
-        }
-
-        // Fallback for missing images
-        document.getElementById('project-img').onerror = function() {
-            this.src = 'https://via.placeholder.com/600x300/667eea/ffffff?text=' + encodeURIComponent(document.getElementById('project-title').textContent);
-        };
-    </script>
-    
+	<!-- Load project data first -->
     <script src="js/data/projects-data.js"></script>
-	<script src="js/ui/navigation.js"></script>
+    <!-- Then load the display logic -->
+    <script src="js/ui/projects.js"></script>
+    <!-- Load navigation -->
+    <script src="js/ui/navigation.js"></script>
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protected Content - Takendrop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">Jerzy Woźniak</h1>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="japanese.html">Japanese</a></li>
+                <li><a href="memes.html">Memes</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-header fade-in">
+        <h2>🔒 Protected Content</h2>
+        <p>This page is only accessible to logged-in users</p>
+    </div>
+
+    <section class="content-section">
+        <h3>Welcome, <span id="user-name"></span>!</h3>
+        
+        <p>This is a protected page that only logged-in users can access.</p>
+        
+        <p>You can use this pattern to protect any page on your site. Just add the <code>protectPage()</code> function at the beginning of the page.</p>
+        
+        <div style="background: #f9f9f9; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+            <h3>🎉 You're logged in!</h3>
+            <p>This could contain:</p>
+            <ul>
+                <li>Private notes or journal entries</li>
+                <li>Study materials or resources</li>
+                <li>Personal projects in progress</li>
+                <li>Admin tools or settings</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <button onclick="logout()" class="btn" style="background: #ff4444; cursor: pointer; border: none; font-size: 1rem;">
+                Logout
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Takendrop. All rights reserved.</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script>
+        // Protect this page - must be logged in to view
+        protectPage();
+        
+        // Display username
+        document.getElementById('user-name').textContent = getCurrentUser();
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

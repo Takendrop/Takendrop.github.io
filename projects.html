@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects - My Personal Site</title>
+    <title>Projects - Takendrop</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,9 +14,9 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="projects.html" class="active">Projects</a></li>
-				<li><a href="japanese.html">Japanese</a></li>
-    			<li><a href="memes.html">Memes</a></li>
-				<li><a href="games.html">Games</a></li>
+                <li><a href="japanese.html">Japanese</a></li>
+                <li><a href="memes.html">Memes</a></li>
+                <li><a href="games.html">Games</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="hamburger">
@@ -29,43 +29,27 @@
 
     <div class="page-header fade-in">
         <h2>My Projects</h2>
-        <p>Things I'm building and learning from</p>
+        <p>Click to view different projects</p>
     </div>
 
-    <div class="project-grid">
-        <div class="project-card">
-            <img src="https://via.placeholder.com/400x200/667eea/ffffff?text=Project+1" alt="Project 1">
-            <div class="project-card-content">
-                <h3>Project One</h3>
-                <p>Description of your first project. Replace this with your actual project details.</p>
-                <a href="#" class="btn" style="margin-top: 1rem; font-size: 0.9rem; padding: 0.5rem 1rem;">View Project</a>
-            </div>
+    <div class="project-display">
+        <!-- Buttons to switch projects -->
+        <div class="project-buttons">
+            <button class="project-btn" onclick="showProject(1)">Project 1</button>
+            <button class="project-btn" onclick="showProject(2)">Project 2</button>
+            <button class="project-btn" onclick="showProject(3)">Project 3</button>
+            <button class="project-btn" onclick="showProject(4)">Project 4</button>
         </div>
 
-        <div class="project-card">
-            <img src="https://via.placeholder.com/400x200/764ba2/ffffff?text=Project+2" alt="Project 2">
-            <div class="project-card-content">
-                <h3>Project Two</h3>
-                <p>Description of your second project. This is a placeholder you can update later.</p>
-                <a href="#" class="btn" style="margin-top: 1rem; font-size: 0.9rem; padding: 0.5rem 1rem;">View Project</a>
+        <!-- Project content area (hidden initially) -->
+        <div id="project-content" style="display: none;">
+            <div class="project-info">
+                <h2 id="project-title"></h2>
+                <div id="project-description1"></div>
             </div>
-        </div>
-
-        <div class="project-card">
-            <img src="https://via.placeholder.com/400x200/f093fb/ffffff?text=Project+3" alt="Project 3">
-            <div class="project-card-content">
-                <h3>Project Three</h3>
-                <p>Description of your third project. Add your own content when ready.</p>
-                <a href="#" class="btn" style="margin-top: 1rem; font-size: 0.9rem; padding: 0.5rem 1rem;">View Project</a>
-            </div>
-        </div>
-
-        <div class="project-card">
-            <img src="https://via.placeholder.com/400x200/4facfe/ffffff?text=Coming+Soon" alt="Coming Soon">
-            <div class="project-card-content">
-                <h3>More Coming Soon</h3>
-                <p>I'm always working on new projects. Check back soon to see what's next!</p>
-                <a href="#" class="btn" style="margin-top: 1rem; font-size: 0.9rem; padding: 0.5rem 1rem;">Stay Tuned</a>
+            <img id="project-img" class="project-image" src="" alt="Project">
+            <div class="project-info">
+                <div id="project-description2"></div>
             </div>
         </div>
     </div>
@@ -74,6 +58,61 @@
         <p>&copy; 2025 Takendrop. All rights reserved.</p>
     </footer>
 
+    <!-- Load project data first -->
+    <script src="js/projects-data.js"></script>
+    
+    <!-- Then load the display logic -->
+    <script>
+        // Function to switch projects
+        function showProject(num) {
+            const project = projectsData[num];
+            const imgElement = document.getElementById('project-img');
+            const contentArea = document.getElementById('project-content');
+            
+            // Show the content area
+            contentArea.style.display = 'block';
+            
+            // Update title
+            document.getElementById('project-title').textContent = project.title;
+            
+            // Update descriptions with HTML formatting
+            document.getElementById('project-description1').innerHTML = formatText(project.description1);
+            document.getElementById('project-description2').innerHTML = formatText(project.description2);
+            
+            // Handle image or placeholder
+            if (project.image && project.image !== "") {
+                imgElement.src = project.image;
+                imgElement.style.display = 'block';
+            } else {
+                imgElement.src = 'https://via.placeholder.com/600x300/667eea/ffffff?text=' + encodeURIComponent(project.title);
+                imgElement.style.display = 'block';
+            }
+            
+            // Update active button
+            document.querySelectorAll('.project-btn').forEach((btn, index) => {
+                btn.classList.remove('active');
+                if (index === num - 1) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Helper function to format text with line breaks
+        function formatText(text) {
+            return text.split('\n').map(line => {
+                if (line.trim() === '') return '<br>';
+                if (line.match(/^[A-Z\s]+$/)) return `<h3>${line}</h3>`;
+                return `<p>${line}</p>`;
+            }).join('');
+        }
+
+        // Fallback for missing images
+        document.getElementById('project-img').onerror = function() {
+            this.src = 'https://via.placeholder.com/600x300/667eea/ffffff?text=' + encodeURIComponent(document.getElementById('project-title').textContent);
+        };
+    </script>
+    
+    <!-- Load menu script -->
     <script src="js/script.js"></script>
 </body>
 </html>

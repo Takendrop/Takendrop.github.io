@@ -1,0 +1,32 @@
+/* CSS Variables */
+:root {
+    --color-primary: #667eea;
+    --color-secondary: #764ba2;
+    --color-dark: #2c3e50;
+    --color-light: #f8f9fa;
+    --color-white: #fff;
+    --color-text: #333;
+    --color-text-light: #666;
+    --color-text-lighter: #555;
+    --color-border: #e9ecef;
+    
+    --border-radius: 10px;
+    --border-radius-sm: 5px;
+    --box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    --box-shadow-sm: 0 2px 5px rgba(0,0,0,0.1);
+    --transition: 0.3s;
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body & Typography */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--color-text);
+}

@@ -9,9 +9,9 @@ Takendrop.github.io/
 ├── index.html
 ├── css/style.css
 └── assets/certificates/
-    ├── PCAP.pdf + PCAP-preview.jpg
-    ├── PCEP.pdf + PCEP-preview.jpg
-    └── AZ-900.pdf + AZ-900-preview.jpg
+    ├── PCAP.pdf
+    ├── PCEP.pdf
+    └── AZ-900.pdf
 ```
 
 ## 📧 Kontakt

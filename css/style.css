@@ -199,7 +199,7 @@ body {
 .hero {
   margin-top: 4rem;                /* Odstęp od navbar (navbar ma ~64px wysokości) */
   padding: var(--spacing-xl) var(--spacing-md);
-  min-height: 85vh;                /* Minimum 85% wysokości viewportu */
+  min-height: 60vh;                /* Minimum 60% wysokości viewportu */
   
   /* Flexbox do centrowania zawartości */
   display: flex;
@@ -229,7 +229,6 @@ body {
 }
 
 .hero-label {
-  /* Mały tag "Programista" nad nazwiskiem */
   display: inline-block;           /* Pozwala ustawić padding na elemencie inline */
   font-size: 0.85rem;
   font-weight: 700;
@@ -425,7 +424,8 @@ body {
    ======================================== */
 
 .about-content {
-  max-width: 800px;                /* Węższa kolumna dla lepszej czytelności tekstu */
+  max-width: 1000px;  /* Ta sama szerokość co projects-grid */
+  margin: 0 auto;    /* Wyśrodkowanie */
 }
 
 .about-text p {
@@ -529,6 +529,8 @@ body {
   /* Prosty grid - jedna kolumna */
   display: grid;
   gap: var(--spacing-lg);
+  max-width: 1000px;  /* Limit the grid width */
+  margin: 0 auto;    /* Center it */
 }
 
 .project-card {
@@ -767,6 +769,8 @@ body {
 .experience-list {
   display: grid;
   gap: var(--spacing-md);
+  max-width: 1000px;  /* Ta sama szerokość co projects-grid */
+  margin: 0 auto;    /* Wyśrodkowanie */
 }
 
 .experience-item {

@@ -6,22 +6,27 @@ Strona portfolio w HTML i CSS, prezentująca moje projekty i certyfikaty.
 
 ```
 Takendrop.github.io/
-├── index.html            # Główny plik HTML
+├── index.html				# Główny plik HTML
 ├── css/
-│   └── style.css         # Arkusz stylów CSS
+│   └── style.css			# Arkusz stylów CSS
 ├── js/
-│   └── main.js           # Plik JavaScript obsługujący funkcje strony
+│   └── main.js				# Plik JavaScript obsługujący funkcje strony
 └── assets/
-    └── certificates/     # Folder z plikami PDF certyfikatów
-        ├── PCAP.pdf
-        ├── PCEP.pdf
-        └── AZ-900.pdf
+    ├── certificates/		# Folder z plikami PDF certyfikatów
+    │   ├── PCAP.pdf
+    │   ├── PCEP.pdf
+    │   └── AZ-900.pdf
+	└── images/				# Folder z obrazkami
+		└── og-image.jpg
 ```
+**Uwagi:**  
+- Folder `assets/certificates` zawiera pliki PDF certyfikatów.
 
 ## 🚀 Funkcjonalności i technologia
 
 - Strona statyczna zbudowana w HTML i CSS
-- Dodany skrypt JavaScript (`js/main.js`) do obsługi interakcji i dynamicznych elementów (np. nawigacja, animacje, obsługa przycisków)
+- Dodany skrypt JavaScript (`js/main.js`) do obsługi interakcji i dynamicznych elementów
+- Komentarze w stylach CSS dla lepszej czytelności i modyfikacji
 - Przyjazny dla użytkownika design i łatwa nawigacja
 
 ## 📧 Kontakt

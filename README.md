@@ -1,36 +1,55 @@
 # Portfolio Jerzy Woźniak
 
-Strona portfolio w HTML i CSS, prezentująca moje projekty i certyfikaty.
+Profesjonalna strona portfolio prezentująca moje projekty, certyfikaty i doświadczenie jako junior developer.
 
-## 📂 Struktura
+## 🌐 Demo
 
+Strona dostępna pod adresem: [takendrop.github.io](https://takendrop.github.io)
+
+## 📂 Struktura projektu
 ```
 Takendrop.github.io/
-├── index.html				# Główny plik HTML
+├── index.html              # Główny plik HTML
 ├── css/
-│   └── style.css			# Arkusz stylów CSS
+│   └── style.css           # Arkusz stylów CSS z system zmiennych i sekcjami
 ├── js/
-│   └── main.js				# Plik JavaScript obsługujący funkcje strony
+│   └── main.js             # Obsługa animacji, nawigacji i interakcji
 └── assets/
-    ├── certificates/		# Folder z plikami PDF certyfikatów
-    │   ├── PCAP.pdf
-    │   ├── PCEP.pdf
-    │   └── AZ-900.pdf
-	└── images/				# Folder z obrazkami
-		└── og-image.jpg
+    ├── certificates/       # Pliki PDF certyfikatów (PCAP, PCEP, AZ-900, DP-900)
+    └── images/             # Obrazy projektów i podglądy
 ```
-**Uwagi:**  
-- Folder `assets/certificates` zawiera pliki PDF certyfikatów.
 
-## 🚀 Funkcjonalności i technologia
+## 🚀 Technologie
 
-- Strona statyczna zbudowana w HTML i CSS
-- Dodany skrypt JavaScript (`js/main.js`) do obsługi interakcji i dynamicznych elementów
-- Komentarze w stylach CSS dla lepszej czytelności i modyfikacji
-- Przyjazny dla użytkownika design i łatwa nawigacja
+- **HTML5** - semantyczna struktura strony
+- **CSS3** - custom properties, grid, flexbox, animacje
+- **JavaScript (Vanilla)** - interaktywność bez frameworków
+- **Responsive Design** - responsywny layout dostosowany do różnych urządzeń
+
+## ✨ Funkcjonalności
+
+- **Smooth scroll** - płynne przewijanie do sekcji
+- **Reveal animations** - animacje pojawiania się elementów przy scrollowaniu
+- **Interaktywne karty projektów** - hover effects i linki do repozytoriów GitHub
+- **Galeria certyfikatów** - podgląd i pobieranie certyfikatów PDF
+- **Mobilna nawigacja** - responsywne menu na urządzenia mobilne
+- **Optymalizacja wydajności** - czytelny, modularny kod CSS z komentarzami
+
+## 🎨 Sekcje strony
+
+1. **O mnie** - wprowadzenie i cel zawodowy
+2. **Projekty** - portfolio projektów z opisami i linkami do GitHub
+3. **Certyfikaty** - zdobyte certyfikaty (Python, Azure)
+4. **Doświadczenie** - historia zawodowa i rozwój
+5. **Nauka** - plan rozwoju i technologie
+6. **Kontakt** - informacje kontaktowe
 
 ## 📧 Kontakt
 
-Jeśli masz pytania lub chcesz się ze mną skontaktować, napisz na: 
+Masz pytania lub propozycję współpracy?  
+📩 **Email:** jerzyk.wozniak@gmail.com  
+💼 **GitHub:** [github.com/Takendrop](https://github.com/Takendrop/Takendrop.github.io)
 
-jerzyk.wozniak@gmail.com
+---
+
+© 2024 Jerzy Woźniak | Junior Developer

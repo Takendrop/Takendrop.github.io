@@ -1,104 +1,119 @@
 // ========================================
-// ACTIVE NAVIGATION HIGHLIGHTING
+// CONFIG
 // ========================================
 
-function updateActiveNav() {
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-  
-  let currentSection = '';
-  
+const CONFIG = {
+  navOffset: 80,          // wysokość navbaru
+  revealOffset: 150,      // kiedy pokazać element
+  backToTopOffset: 300    // kiedy pokazać przycisk
+};
+
+// ========================================
+// SELECTORS
+// ========================================
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const reveals = document.querySelectorAll('.reveal');
+const backToTopBtn = document.querySelector('.back-to-top');
+
+// ========================================
+// ACTIVE NAVIGATION
+// ========================================
+
+function updateActiveNav(scrollY) {
+  let currentSection = null;
+
   sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-    
-    if (window.scrollY >= sectionTop - 100) {
-      currentSection = section.getAttribute('id');
+    const top = section.offsetTop - CONFIG.navOffset;
+    const bottom = top + section.offsetHeight;
+
+    if (scrollY >= top && scrollY < bottom) {
+      currentSection = section.id;
     }
   });
-  
+
   navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === `#${currentSection}`) {
-      link.classList.add('active');
-    }
+    link.classList.toggle(
+      'active',
+      link.getAttribute('href') === `#${currentSection}`
+    );
   });
 }
 
 // ========================================
-// SCROLL REVEAL ANIMATIONS
+// SCROLL REVEAL
 // ========================================
 
-function revealOnScroll() {
-  const reveals = document.querySelectorAll('.reveal');
-  
+function handleReveal() {
   reveals.forEach(element => {
-    const elementTop = element.getBoundingClientRect().top;
-    const elementVisible = 150;
-    
-    if (elementTop < window.innerHeight - elementVisible) {
+    const rect = element.getBoundingClientRect();
+
+    if (rect.top < window.innerHeight - CONFIG.revealOffset) {
       element.classList.add('active');
     }
   });
 }
 
 // ========================================
-// BACK TO TOP BUTTON
+// BACK TO TOP
 // ========================================
 
-function toggleBackToTop() {
-  const backToTop = document.querySelector('.back-to-top');
-  
-  if (window.scrollY > 300) {
-    backToTop.classList.add('visible');
-  } else {
-    backToTop.classList.remove('visible');
-  }
+function toggleBackToTop(scrollY) {
+  backToTopBtn?.classList.toggle(
+    'visible',
+    scrollY > CONFIG.backToTopOffset
+  );
 }
 
 function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ========================================
+// SCROLL HANDLER (ONE SOURCE OF TRUTH)
+// ========================================
+
+function onScroll() {
+  const scrollY = window.scrollY;
+
+  updateActiveNav(scrollY);
+  handleReveal();
+  toggleBackToTop(scrollY);
+}
+
+// ========================================
+// SMOOTH NAV SCROLL
+// ========================================
+
+function setupNavLinks() {
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+
+      const targetY =
+        target.offsetTop - CONFIG.navOffset + 1;
+
+      window.scrollTo({
+        top: targetY,
+        behavior: 'smooth'
+      });
+    });
   });
 }
 
 // ========================================
-// EVENT LISTENERS
+// INIT
 // ========================================
 
-// Scroll events
-window.addEventListener('scroll', () => {
-  updateActiveNav();
-  revealOnScroll();
-  toggleBackToTop();
-});
-
-// Back to top button click
 document.addEventListener('DOMContentLoaded', () => {
-  const backToTop = document.querySelector('.back-to-top');
-  if (backToTop) {
-    backToTop.addEventListener('click', scrollToTop);
-  }
-  
-  // Run once on load
-  updateActiveNav();
-  revealOnScroll();
-});
+  window.addEventListener('scroll', onScroll);
+  onScroll(); // initial state
 
-// Smooth scroll for nav links (extra smooth with offset)
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const targetId = link.getAttribute('href');
-    const targetSection = document.querySelector(targetId);
-    
-    if (targetSection) {
-      const offsetTop = targetSection.offsetTop - 70;
-      window.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
-      });
-    }
-  });
+  setupNavLinks();
+
+  backToTopBtn?.addEventListener('click', scrollToTop);
 });

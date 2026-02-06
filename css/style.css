@@ -1,173 +1,240 @@
 /* ========================================
    RESET & BASE STYLES
-   ======================================== */
+   ======================================== 
+   
+   Ta sekcja resetuje domyślne style przeglądarki
+   i ustawia podstawowe wartości dla całej strony.
+*/
 
 * {
+  /* Reset marginesów i paddingów dla WSZYSTKICH elementów */
   margin: 0;
   padding: 0;
+  /* border-box sprawia, że padding i border są wliczane w szerokość/wysokość elementu */
   box-sizing: border-box;
 }
 
 :root {
-  /* Color Palette - Bold and Distinctive */
-  --color-bg: #fafafa;
-  --color-surface: #ffffff;
-  --color-text-primary: #0a0a0a;
-  --color-text-secondary: #525252;
-  --color-accent: #ff4500;
-  --color-accent-dark: #cc3700;
-  --color-border: #e5e5e5;
-  --color-border-heavy: #0a0a0a;
+  /* ========================================
+     ZMIENNE CSS (CSS Custom Properties)
+     ======================================== 
+     
+     Zmienne pozwalają przechowywać wartości i używać ich w całym pliku.
+     Użycie: var(--nazwa-zmiennej)
+     Zaleta: zmiana wartości w jednym miejscu aktualizuje całą stronę
+  */
   
-  /* Typography */
-  --font-display: 'Archivo Black', sans-serif;
-  --font-body: 'Manrope', sans-serif;
+  /* === KOLORY === */
+  --color-bg: #fafafa;              /* Tło strony - jasny szary */
+  --color-surface: #ffffff;          /* Kolor powierzchni (karty, navbary) - biały */
+  --color-text-primary: #0a0a0a;    /* Główny kolor tekstu - prawie czarny */
+  --color-text-secondary: #525252;   /* Drugorzędny tekst - ciemny szary */
+  --color-accent: #ff4500;           /* Kolor akcentu - pomarańczowy/czerwony */
+  --color-accent-dark: #cc3700;      /* Ciemniejsza wersja akcentu (dla hover) */
+  --color-border: #e5e5e5;           /* Jasna ramka - jasny szary */
+  --color-border-heavy: #0a0a0a;     /* Ciężka ramka - czarna */
   
-  /* Spacing */
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 4rem;
-  --spacing-xl: 6rem;
+  /* === TYPOGRAFIA === */
+  --font-display: 'Archivo Black', sans-serif;  /* Font dla nagłówków - gruby, wyrazisty */
+  --font-body: 'Manrope', sans-serif;           /* Font dla tekstu - czytelny, nowoczesny */
   
-  /* Transitions */
-  --transition-fast: 0.2s ease;
-  --transition-base: 0.3s ease;
-  --transition-slow: 0.5s ease;
+  /* === ODSTĘPY === 
+     System odstępów zapewnia spójność w całym projekcie
+     rem = relative to root font-size (domyślnie 16px)
+  */
+  --spacing-xs: 0.5rem;   /* 8px  - bardzo małe odstępy */
+  --spacing-sm: 1rem;     /* 16px - małe odstępy */
+  --spacing-md: 2rem;     /* 32px - średnie odstępy */
+  --spacing-lg: 4rem;     /* 64px - duże odstępy */
+  --spacing-xl: 6rem;     /* 96px - bardzo duże odstępy */
+  
+  /* === PRZEJŚCIA ===
+     ease = płynne przyspieszenie i zwolnienie animacji
+  */
+  --transition-fast: 0.2s ease;   /* Szybkie przejścia - np. buttony */
+  --transition-base: 0.3s ease;   /* Standardowe przejścia - większość efektów */
+  --transition-slow: 0.5s ease;   /* Wolne przejścia - duże animacje */
 }
 
 html {
+  /* Płynne przewijanie do sekcji (anchor links) */
   scroll-behavior: smooth;
+  /* Bazowy rozmiar czcionki - wszystkie rem'y odnoszą się do tej wartości */
   font-size: 16px;
 }
 
 body {
+  /* Główna czcionka dla całej strony */
   font-family: var(--font-body);
+  /* Kolor tła strony */
   background-color: var(--color-bg);
+  /* Kolor tekstu */
   color: var(--color-text-primary);
+  /* Wysokość linii (odstęp między liniami tekstu) - 1.7 = 170% rozmiaru czcionki */
   line-height: 1.7;
+  /* Ukrywa poziomy scrollbar jeśli pojawi się przez animacje */
   overflow-x: hidden;
 }
 
 /* ========================================
    NAVIGATION
-   ======================================== */
+   ======================================== 
+   
+   Stały navbar na górze strony z linkami do sekcji
+*/
 
 .nav {
+  /* === POZYCJONOWANIE ===
+     fixed = element pozostaje w tym samym miejscu podczas scrollowania
+  */
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0;      /* Przyklej do góry */
+  left: 0;     /* Przyklej do lewej */
+  right: 0;    /* Rozciągnij do prawej */
+  
+  /* z-index kontroluje, który element jest "na wierzchu"
+     1000 = na wierzchu większości elementów */
   z-index: 1000;
+  
+  /* Kolory i odstępy */
   background-color: var(--color-surface);
   border-bottom: 3px solid var(--color-border-heavy);
   padding: var(--spacing-sm) var(--spacing-md);
+  
+  /* === FLEXBOX ===
+     Flexbox to system układu elementów w linii lub kolumnie
+  */
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between;  /* Rozłóż elementy z maksymalnym odstępem */
+  align-items: center;             /* Wycentruj elementy pionowo */
+  
+  /* Animacja pojawienia się navbar */
   animation: slideDown 0.6s ease-out;
 }
 
+/* === KEYFRAMES ===
+   Definiują kroki animacji - od stanu początkowego do końcowego
+*/
 @keyframes slideDown {
   from {
-    transform: translateY(-100%);
-    opacity: 0;
+    /* Stan początkowy - navbar powyżej ekranu */
+    transform: translateY(-100%);  /* Przesuń 100% własnej wysokości w górę */
+    opacity: 0;                    /* Całkowicie przezroczysty */
   }
   to {
-    transform: translateY(0);
-    opacity: 1;
+    /* Stan końcowy - navbar na swoim miejscu */
+    transform: translateY(0);      /* Brak przesunięcia */
+    opacity: 1;                    /* Całkowicie widoczny */
   }
 }
 
 .nav-brand {
+  /* Styl logo/nazwy w navbar */
   font-family: var(--font-display);
   font-size: 1.75rem;
   color: var(--color-accent);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.02em;    /* Lekko zsunięte litery (tightening) */
+  text-decoration: none;      /* Usuń podkreślenie z linku */
 }
 
 .nav-links {
+  /* Kontener dla linków nawigacji */
   display: flex;
-  gap: var(--spacing-md);
+  gap: var(--spacing-md);  /* Odstęp między linkami */
 }
 
 .nav-links a {
+  /* Styl dla pojedynczego linku w navbar */
   color: var(--color-text-primary);
-  text-decoration: none;
-  font-weight: 600;
+  text-decoration: none;           /* Usuń podkreślenie */
+  font-weight: 600;                /* Grubsza czcionka */
   font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  text-transform: uppercase;       /* WIELKIE LITERY */
+  letter-spacing: 0.05em;          /* Lekko rozszerzone litery */
+  
+  /* === POSITION RELATIVE ===
+     Potrzebne do pozycjonowania pseudo-elementu ::after
+  */
   position: relative;
+  
+  /* Płynne przejście koloru przy hover */
   transition: color var(--transition-base);
 }
 
+/* === PSEUDO-ELEMENT ::after ===
+   Tworzy element "po" zawartości - tu: podkreślenie
+*/
 .nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
+  content: '';                     /* Pusty content - wymagany dla pseudo-elementów */
+  position: absolute;              /* Pozycjonowanie względem rodzica (a) */
+  bottom: -4px;                    /* 4px poniżej tekstu */
   left: 0;
-  width: 0;
-  height: 3px;
+  width: 0;                        /* Początkowo niewidoczne (szerokość 0) */
+  height: 3px;                     /* Grubość podkreślenia */
   background-color: var(--color-accent);
-  transition: width var(--transition-base);
+  transition: width var(--transition-base);  /* Animuj zmianę szerokości */
 }
 
-.nav-links a:hover {
-  color: var(--color-accent);
-}
-
-.nav-links a:hover::after {
-  width: 100%;
-}
-
+/* === PSEUDO-KLASY :hover i .active ===
+   :hover = gdy użytkownik najedzie myszką
+   .active = klasa dodana przez JavaScript dla aktywnej sekcji
+*/
+.nav-links a:hover,
 .nav-links a.active {
-  color: var(--color-accent);
+  color: var(--color-accent);      /* Zmień kolor tekstu */
 }
 
+.nav-links a:hover::after,
 .nav-links a.active::after {
-  width: 100%;
+  width: 100%;                     /* Rozciągnij podkreślenie */
 }
 
 /* ========================================
    HERO SECTION
-   ======================================== */
+   ======================================== 
+   
+   Główna sekcja powitalna z dużym nagłówkiem
+*/
 
 .hero {
-  margin-top: 4rem;
+  margin-top: 4rem;                /* Odstęp od navbar (navbar ma ~64px wysokości) */
   padding: var(--spacing-xl) var(--spacing-md);
-  min-height: 85vh;
+  min-height: 85vh;                /* Minimum 85% wysokości viewportu */
+  
+  /* Flexbox do centrowania zawartości */
   display: flex;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
+  align-items: center;             /* Wycentruj pionowo */
+  
+  position: relative;              /* Dla absolutnie pozycjonowanej dekoracji */
+  overflow: hidden;                /* Ukryj wystającą dekorację */
 }
 
 .hero-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  z-index: 2;
-  animation: fadeInUp 0.8s ease-out 0.3s both;
+  max-width: 1200px;               /* Maksymalna szerokość contentu */
+  margin: 0 auto;                  /* Wycentruj poziomo (auto margins) */
+  z-index: 2;                      /* Powyżej dekoracji (z-index: 1) */
+  animation: fadeInUp 0.8s ease-out 0.3s both;  /* Animacja z opóźnieniem 0.3s */
   width: 100%;
 }
 
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(40px);   /* Zaczyna 40px niżej */
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0);      /* Kończy na swoim miejscu */
   }
 }
 
 .hero-label {
-  display: inline-block;
+  /* Mały tag "Programista" nad nazwiskiem */
+  display: inline-block;           /* Pozwala ustawić padding na elemencie inline */
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.15em;          /* Mocno rozsunięte litery */
   color: var(--color-accent);
   margin-bottom: var(--spacing-sm);
   padding: var(--spacing-xs) var(--spacing-sm);
@@ -176,31 +243,42 @@ body {
 }
 
 .hero-title {
+  /* Główny nagłówek z nazwiskiem */
   font-family: var(--font-display);
-  font-size: clamp(3rem, 12vw, 7rem);
-  line-height: 0.9;
+  
+  /* === CLAMP ===
+     clamp(min, preferred, max)
+     Responsive rozmiar czcionki bez media queries
+  */
+  font-size: clamp(3rem, 12vw, 7rem);  /* Min 3rem, idealne 12% viewportu, max 7rem */
+  
+  line-height: 0.9;                /* Bardzo ciasno ustawione linie (90%) */
   margin-bottom: var(--spacing-md);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.03em;         /* Ściśnięte litery dla lepszego wyglądu */
 }
 
 .hero-title-line {
-  display: block;
+  /* Każda linia nazwiska (Jerzy / Woźniak) */
+  display: block;                  /* Każda w nowej linii */
   animation: slideInLeft 0.8s ease-out both;
 }
 
+/* === nth-child ===
+   Pozwala stylizować konkretne dziecko rodzica
+*/
 .hero-title-line:nth-child(1) {
-  animation-delay: 0.5s;
+  animation-delay: 0.5s;           /* Pierwsza linia pojawia się wcześniej */
 }
 
 .hero-title-line:nth-child(2) {
-  animation-delay: 0.6s;
-  color: var(--color-accent);
+  animation-delay: 0.6s;           /* Druga linia z lekkim opóźnieniem */
+  color: var(--color-accent);      /* Druga linia w kolorze akcentu */
 }
 
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(-50px);
+    transform: translateX(-50px);  /* Zaczyna 50px z lewej */
   }
   to {
     opacity: 1;
@@ -211,24 +289,27 @@ body {
 .hero-subtitle {
   font-size: clamp(1.1rem, 2vw, 1.4rem);
   color: var(--color-text-secondary);
-  max-width: 650px;
+  max-width: 650px;                /* Ograniczona szerokość dla lepszej czytelności */
   margin-bottom: var(--spacing-md);
   animation: fadeInUp 0.8s ease-out 0.7s both;
 }
 
 .hero-subtitle strong {
+  /* Wyróżnione słowa w subtytle */
   color: var(--color-text-primary);
   font-weight: 800;
 }
 
 .hero-tech-stack {
+  /* Kontener dla badge'y technologii */
   display: flex;
   gap: var(--spacing-sm);
-  flex-wrap: wrap;
+  flex-wrap: wrap;                 /* Zawijaj do nowej linii jeśli nie ma miejsca */
   animation: fadeInUp 0.8s ease-out 0.8s both;
 }
 
 .tech-badge {
+  /* Pojedynczy badge technologii */
   padding: var(--spacing-xs) var(--spacing-sm);
   background-color: var(--color-border-heavy);
   color: var(--color-surface);
@@ -236,58 +317,79 @@ body {
   font-size: 0.9rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  transition: all var(--transition-base);
+  transition: all var(--transition-base);  /* Animuj wszystkie właściwości */
 }
 
 .tech-badge:hover {
+  /* Efekt przy najechaniu na badge */
   background-color: var(--color-accent);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);
+  transform: translateY(-3px);     /* Unieś 3px do góry */
+  box-shadow: 0 4px 12px rgba(255, 69, 0, 0.3);  /* Cień z opacity 30% */
 }
 
 .hero-decoration {
-  position: absolute;
-  right: -10%;
+  /* Dekoracyjne koło w tle Hero */
+  position: absolute;              /* Pozycjonowanie względem .hero */
+  right: -10%;                     /* Lekko wystające poza ekran */
   top: 20%;
   width: 600px;
   height: 600px;
+  
+  /* === GRADIENT ===
+     linear-gradient(kierunek, kolor1, kolor2)
+     135deg = po przekątnej
+  */
   background: linear-gradient(135deg, rgba(255, 69, 0, 0.1), rgba(255, 69, 0, 0.05));
-  border-radius: 50%;
-  filter: blur(80px);
-  z-index: 1;
-  animation: float 8s ease-in-out infinite;
+  
+  border-radius: 50%;              /* Okrągły kształt */
+  filter: blur(80px);              /* Mocne rozmycie */
+  z-index: 1;                      /* Pod contentem (content ma z-index: 2) */
+  animation: float 8s ease-in-out infinite;  /* Infinite = animacja się powtarza */
 }
 
 @keyframes float {
   0%, 100% {
+    /* Stan początkowy i końcowy - bez transformacji */
     transform: translateY(0) scale(1);
   }
   50% {
+    /* W połowie animacji - lekko w górę i większe */
     transform: translateY(-30px) scale(1.05);
   }
 }
 
 /* ========================================
    SECTIONS
-   ======================================== */
+   ======================================== 
+   
+   Wspólne style dla wszystkich sekcji
+*/
 
 .section {
   padding: var(--spacing-xl) var(--spacing-md);
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1200px;               /* Ograniczenie szerokości dla czytelności */
+  margin: 0 auto;                  /* Centrowanie */
   width: 100%;
 }
 
+/* === .section-alt ===
+   Alternatywne sekcje z tłem (Skills, Education)
+*/
 .section-alt {
   background-color: var(--color-surface);
   border-top: 3px solid var(--color-border-heavy);
   border-bottom: 3px solid var(--color-border-heavy);
   padding: var(--spacing-xl) var(--spacing-md);
-  max-width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  
+  /* === FULL-WIDTH BACKGROUND ===
+     Trik: ujemne marginesy rozciągają element na całą szerokość
+  */
+  max-width: 100vw;                /* 100% viewport width */
+  margin-left: calc(50% - 50vw);   /* Formuła: przesuń w lewo o połowę viewportu */
+  margin-right: calc(50% - 50vw);  /* To samo w prawo */
 }
 
+/* Zawartość sekcji-alt pozostaje w normalnej szerokości */
 .section-alt > * {
   max-width: 1200px;
   margin-left: auto;
@@ -295,9 +397,10 @@ body {
 }
 
 .section-header {
+  /* Nagłówek sekcji z tytułem i numerem */
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  justify-content: space-between;  /* Tytuł po lewej, numer po prawej */
+  align-items: baseline;           /* Wyrównaj do linii bazowej tekstu */
   margin-bottom: var(--spacing-lg);
   position: relative;
 }
@@ -310,10 +413,11 @@ body {
 }
 
 .section-number {
+  /* Duży, przezroczysty numer sekcji (01, 02, etc.) */
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   color: var(--color-accent);
-  opacity: 0.3;
+  opacity: 0.3;                    /* 30% opacity = lekko widoczny */
 }
 
 /* ========================================
@@ -321,7 +425,7 @@ body {
    ======================================== */
 
 .about-content {
-  max-width: 800px;
+  max-width: 800px;                /* Węższa kolumna dla lepszej czytelności tekstu */
 }
 
 .about-text p {
@@ -331,14 +435,16 @@ body {
 }
 
 .about-text strong {
+  /* Wyróżnione fragmenty tekstu */
   color: var(--color-text-primary);
   font-weight: 700;
 }
 
 .highlight-text {
+  /* Wyróżniony akapit (ostatni w About) */
   padding: var(--spacing-md);
   background-color: var(--color-surface);
-  border-left: 4px solid var(--color-accent);
+  border-left: 4px solid var(--color-accent);  /* Akcentowa linia po lewej */
   font-weight: 600;
   color: var(--color-text-primary);
   font-size: 1.15rem;
@@ -349,7 +455,16 @@ body {
    ======================================== */
 
 .skills-grid {
+  /* === CSS GRID ===
+     Nowoczesny system układu w siatce
+  */
   display: grid;
+  
+  /* === repeat(auto-fit, minmax()) ===
+     Tworzy responsywną siatkę bez media queries
+     auto-fit = tyle kolumn ile się zmieści
+     minmax(280px, 1fr) = każda kolumna min 280px, max równa część (1fr)
+  */
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--spacing-md);
 }
@@ -362,8 +477,14 @@ body {
 }
 
 .skill-card:hover {
-  transform: translateY(-5px);
+  /* Efekt hover na karcie */
+  transform: translateY(-5px);     /* Unieś do góry */
   border-color: var(--color-accent);
+  
+  /* === BOX-SHADOW ===
+     box-shadow: x y blur spread color
+     Tu: 8px w prawo, 8px w dół, bez blur, bez spread, kolor z alpha
+  */
   box-shadow: 8px 8px 0 rgba(255, 69, 0, 0.15);
 }
 
@@ -380,19 +501,20 @@ body {
 }
 
 .skill-list {
-  list-style: none;
+  list-style: none;                /* Usuń domyślne punktory listy */
 }
 
 .skill-list li {
   padding: var(--spacing-xs) 0;
   font-weight: 500;
   color: var(--color-text-secondary);
-  position: relative;
-  padding-left: var(--spacing-md);
+  position: relative;              /* Dla pseudo-elementu ::before */
+  padding-left: 1.2rem;            /* Miejsce na własny punktor */
 }
 
+/* Własny punktor listy */
 .skill-list li::before {
-  content: '▸';
+  content: '▸';                    /* Unicode arrow character */
   position: absolute;
   left: 0;
   color: var(--color-accent);
@@ -404,8 +526,9 @@ body {
    ======================================== */
 
 .projects-grid {
+  /* Prosty grid - jedna kolumna */
   display: grid;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
 }
 
 .project-card {
@@ -416,17 +539,16 @@ body {
 }
 
 .project-card:hover {
-  transform: translateX(8px);
-  box-shadow: -8px 8px 0 rgba(255, 69, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 12px 12px 0 rgba(10, 10, 10, 0.1);
 }
 
 .project-header {
+  /* Nagłówek projektu - tytuł i tag obok siebie */
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   margin-bottom: var(--spacing-sm);
-  flex-wrap: wrap;
-  gap: var(--spacing-sm);
 }
 
 .project-title {
@@ -436,28 +558,37 @@ body {
 }
 
 .project-tag {
+  /* Tag "42 Warsaw" / "Personal" */
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background-color: var(--color-accent);
+  color: white;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 0.4rem 0.8rem;
-  background-color: var(--color-accent);
-  color: white;
+  letter-spacing: 0.05em;
 }
 
 .project-description {
+  /* Główny opis projektu */
   color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-sm);
   font-size: 1.05rem;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.6;
 }
 
 .project-learning {
+  /* Dodatkowy akapit "czego nauczyłem się" */
   color: var(--color-text-secondary);
+  font-size: 1rem;
   margin-bottom: var(--spacing-md);
-  font-style: italic;
+  padding-left: var(--spacing-sm);
+  border-left: 3px solid var(--color-border);
+  font-style: italic;              /* Kursywa dla podkreślenia charakteru */
 }
 
 .project-tech {
+  /* Lista technologii użytych w projekcie */
   display: flex;
   gap: var(--spacing-xs);
   flex-wrap: wrap;
@@ -465,24 +596,28 @@ body {
 }
 
 .project-tech span {
-  padding: 0.4rem 0.8rem;
-  background-color: var(--color-border);
-  font-size: 0.85rem;
+  /* Pojedynczy badge technologii */
+  padding: 0.35rem 0.75rem;
+  background-color: var(--color-bg);
+  border: 2px solid var(--color-border-heavy);
+  font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .project-link {
+  /* Link do GitHub */
   display: inline-block;
   color: var(--color-accent);
   text-decoration: none;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 1rem;
   transition: all var(--transition-base);
   position: relative;
 }
 
+/* Animowane podkreślenie linku */
 .project-link::after {
   content: '';
   position: absolute;
@@ -491,27 +626,31 @@ body {
   width: 100%;
   height: 2px;
   background-color: var(--color-accent);
-  transform: scaleX(1);
+  transform: scaleX(1);            /* scaleX = skalowanie w osi X */
   transition: transform var(--transition-base);
 }
 
-.project-link:hover::after {
-  transform: scaleX(0);
+.project-link:hover {
+  transform: translateX(5px);      /* Przesuń w prawo */
 }
 
-.project-link:hover {
-  transform: translateX(5px);
+.project-link:hover::after {
+  transform: scaleX(0);            /* Schowaj podkreślenie */
 }
 
 /* ========================================
-   EDUCATION - TIMELINE
-   ======================================== */
+   TIMELINE (EDUCATION)
+   ======================================== 
+   
+   Oś czasu z markerami i liniami
+*/
 
 .timeline {
   position: relative;
   padding-left: var(--spacing-lg);
 }
 
+/* Pionowa linia po lewej stronie */
 .timeline::before {
   content: '';
   position: absolute;
@@ -527,20 +666,25 @@ body {
   margin-bottom: var(--spacing-lg);
 }
 
+.timeline-item:last-child {
+  margin-bottom: 0;               /* Ostatni element bez dolnego marginesu */
+}
+
 .timeline-marker {
+  /* Kolorowe kółko na osi czasu */
   position: absolute;
-  left: calc(-1 * var(--spacing-lg) - 8px);
-  top: 6px;
+  left: calc(-1 * var(--spacing-lg) - 8px);  /* Wyrównaj z linią (64px + 8px) */
+  top: 0.5rem;
   width: 20px;
   height: 20px;
   background-color: var(--color-accent);
-  border: 3px solid var(--color-surface);
-  transform: rotate(45deg);
+  border: 3px solid var(--color-border-heavy);
+  border-radius: 50%;             /* Okrągły kształt */
 }
 
 .timeline-content h3 {
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   margin-bottom: var(--spacing-sm);
   letter-spacing: -0.01em;
 }
@@ -548,13 +692,15 @@ body {
 .timeline-content p {
   color: var(--color-text-secondary);
   font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 /* ========================================
-   CERTIFICATES
+   CERTIFICATES SECTION
    ======================================== */
 
 .certificates-grid {
+  /* Grid responsywny - min 300px szerokości każdej karty */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-md);
@@ -565,32 +711,21 @@ body {
   border: 3px solid var(--color-border-heavy);
   background-color: var(--color-surface);
   transition: all var(--transition-base);
+  
+  /* === FLEXBOX W KIERUNKU KOLUMNY ===
+     Przydatne gdy chcemy link na dole karty
+  */
   display: flex;
   flex-direction: column;
 }
 
-.certificate-card:not(:has(.certificate-link)) {
-  border-style: dashed;
-  opacity: 0.95;
-}
-
-.certificate-card:not(:has(.certificate-link))::after {
-  content: 'Certyfikat zweryfikowany';
-  display: block;
-  margin-top: var(--spacing-sm);
-  font-size: 0.85rem;
-  color: var(--color-accent);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
 .certificate-card:hover {
   border-color: var(--color-accent);
-  transform: scale(1.02);
+  transform: scale(1.02);         /* Lekkie powiększenie */
 }
 
 .certificate-provider {
+  /* Nazwa organizacji wydającej certyfikat */
   font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -600,6 +735,7 @@ body {
 }
 
 .certificate-name {
+  /* Nazwa certyfikatu */
   font-family: var(--font-body);
   font-size: 1.15rem;
   font-weight: 700;
@@ -613,10 +749,11 @@ body {
 }
 
 .certificate-id {
+  /* ID certyfikatu w monospace font */
   font-size: 0.9rem;
   color: var(--color-text-secondary);
   font-weight: 600;
-  font-family: monospace;
+  font-family: monospace;         /* Monospace = równa szerokość znaków */
   margin-bottom: 0.25rem;
 }
 
@@ -627,8 +764,7 @@ body {
 
 .certificate-link {
   display: inline-block;
-  margin-top: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
+  margin-top: auto;               /* Pchnie link na dół karty (dzięki flex-direction: column) */
   color: var(--color-accent);
   text-decoration: none;
   font-weight: 700;
@@ -637,6 +773,7 @@ body {
   position: relative;
 }
 
+/* Animowane podkreślenie */
 .certificate-link::after {
   content: '';
   position: absolute;
@@ -649,12 +786,12 @@ body {
   transition: transform var(--transition-base);
 }
 
-.certificate-link:hover::after {
-  transform: scaleX(0);
-}
-
 .certificate-link:hover {
   transform: translateX(5px);
+}
+
+.certificate-link:hover::after {
+  transform: scaleX(0);
 }
 
 /* ========================================
@@ -668,7 +805,7 @@ body {
 
 .experience-item {
   padding: var(--spacing-md);
-  border-left: 4px solid var(--color-accent);
+  border-left: 4px solid var(--color-accent);  /* Akcentowa linia po lewej */
   background-color: var(--color-bg);
 }
 
@@ -686,24 +823,24 @@ body {
 
 /* ========================================
    CONTACT SECTION
-   ======================================== */
+   ======================================== 
+   
+   Ciemna sekcja na pełnej wysokości ekranu
+*/
 
 .section-contact {
-  background-color: var(--color-border-heavy);
-  color: var(--color-surface);
+  background-color: var(--color-border-heavy);  /* Czarne tło */
+  color: var(--color-surface);                  /* Biały tekst */
   padding: var(--spacing-xl) var(--spacing-md);
+  
+  /* Full-width background (jak w section-alt) */
   max-width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  min-height: 100vh;
+  
+  min-height: 100vh;              /* Minimum pełna wysokość ekranu */
   display: flex;
-  align-items: center;
-}
-
-.section-contact > * {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  align-items: center;            /* Wycentruj zawartość pionowo */
 }
 
 .contact-content {
@@ -722,11 +859,12 @@ body {
 
 .contact-subtitle {
   font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.7);  /* Biały z 70% opacity */
   margin-bottom: var(--spacing-lg);
 }
 
 .contact-links {
+  /* Lista linków kontaktowych */
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
@@ -734,6 +872,7 @@ body {
 }
 
 .contact-link {
+  /* Pojedynczy link kontaktowy (email/GitHub/LinkedIn) */
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-sm);
@@ -767,9 +906,12 @@ body {
   color: rgba(255, 255, 255, 0.6);
   padding: var(--spacing-md);
   text-align: center;
+  
+  /* Full-width */
   max-width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
+  
   border-top: 3px solid var(--color-accent);
 }
 
@@ -783,10 +925,13 @@ body {
 
 /* ========================================
    BACK TO TOP BUTTON
-   ======================================== */
+   ======================================== 
+   
+   Przycisk do szybkiego powrotu na górę strony
+*/
 
 .back-to-top {
-  position: fixed;
+  position: fixed;                /* Zawsze w tym samym miejscu na ekranie */
   bottom: 2rem;
   right: 2rem;
   width: 50px;
@@ -797,16 +942,22 @@ body {
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: bold;
+  
+  /* Flexbox do centrowania strzałki */
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  /* Początkowo ukryty */
   opacity: 0;
   visibility: hidden;
-  transform: translateY(100px);
+  transform: translateY(100px);   /* Poza ekranem */
+  
   transition: all var(--transition-base);
   z-index: 999;
 }
 
+/* Klasa dodawana przez JavaScript gdy user scrolluje w dół */
 .back-to-top.visible {
   opacity: 1;
   visibility: visible;
@@ -819,49 +970,100 @@ body {
 }
 
 .back-to-top:active {
-  transform: translateY(0);
+  /* Stan gdy użytkownik klika (wciska przycisk) */
+  transform: translateY(0);       /* Powrót do normalnej pozycji */
 }
 
 /* ========================================
-   RESPONSIVE DESIGN
-   ======================================== */
+   SCROLL REVEAL ANIMATIONS
+   ======================================== 
+   
+   Animacje pojawiania się elementów podczas scrollowania
+   JavaScript dodaje klasę .active gdy element wchodzi w viewport
+*/
 
+.reveal {
+  /* Stan początkowy - niewidoczny */
+  opacity: 0;
+  transform: translateY(30px);    /* 30px poniżej docelowej pozycji */
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  /* Stan końcowy - widoczny (klasa dodana przez JS) */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* === STAGGER EFFECT ===
+   Każdy element pojawia się z lekkim opóźnieniem
+   nth-child(1) = pierwszy element, nth-child(2) = drugi, itd.
+*/
+
+/* Skill cards */
+.skill-card.reveal:nth-child(1) { transition-delay: 0.1s; }
+.skill-card.reveal:nth-child(2) { transition-delay: 0.2s; }
+.skill-card.reveal:nth-child(3) { transition-delay: 0.3s; }
+
+/* Project cards */
+.project-card.reveal:nth-child(1) { transition-delay: 0.1s; }
+.project-card.reveal:nth-child(2) { transition-delay: 0.2s; }
+.project-card.reveal:nth-child(3) { transition-delay: 0.3s; }
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== 
+   
+   Media queries dla różnych rozmiarów ekranów
+   @media = reguły CSS stosowane tylko gdy warunek jest spełniony
+*/
+
+/* === TABLET & MOBILE (max-width: 768px) === */
 @media (max-width: 768px) {
   .nav {
+    /* Na mniejszych ekranach nav w kolumnie */
     flex-direction: column;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm);
   }
   
   .nav-links {
+    /* Linki zawijają się do nowych linii */
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--spacing-sm);
   }
   
   .nav-links a {
-    font-size: 0.85rem;
+    font-size: 0.85rem;           /* Mniejsza czcionka */
   }
   
   .hero {
+    /* Mniej paddingu na mobile */
     padding: var(--spacing-lg) var(--spacing-sm);
-    min-height: auto;
+    min-height: auto;             /* Usuń minimalną wysokość */
   }
   
   .section {
     padding: var(--spacing-lg) var(--spacing-sm);
   }
   
+  .section-alt {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
   .section-header {
+    /* Tytuł i numer w kolumnie zamiast obok siebie */
     flex-direction: column;
     gap: var(--spacing-xs);
   }
   
   .section-number {
-    align-self: flex-start;
+    align-self: flex-start;       /* Wyrównaj do lewej */
   }
   
   .skills-grid {
+    /* Jedna kolumna na mobile */
     grid-template-columns: 1fr;
   }
   
@@ -870,10 +1072,12 @@ body {
   }
   
   .timeline {
+    /* Mniejszy padding dla timeline */
     padding-left: var(--spacing-md);
   }
   
   .timeline-marker {
+    /* Dostosuj pozycję markera */
     left: calc(-1 * var(--spacing-md) - 8px);
   }
   
@@ -882,19 +1086,32 @@ body {
   }
   
   .contact-link {
+    /* Linki na całą szerokość */
     width: 100%;
     justify-content: center;
   }
+  
+  .back-to-top {
+    /* Mniejszy przycisk na mobile */
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 45px;
+    height: 45px;
+  }
 }
 
+/* === SMALL MOBILE (max-width: 480px) === */
 @media (max-width: 480px) {
   :root {
+    /* Zmniejsz bazowy rozmiar czcionki na małych ekranach */
     font-size: 14px;
   }
   
   .project-header {
+    /* Tytuł i tag w kolumnie */
     flex-direction: column;
     align-items: flex-start;
+    gap: var(--spacing-xs);
   }
   
   .hero-tech-stack {
@@ -907,58 +1124,40 @@ body {
 }
 
 /* ========================================
-   SMOOTH SCROLL ANIMATIONS
-   ======================================== */
+   ACCESSIBILITY
+   ======================================== 
+   
+   Respektowanie preferencji użytkownika
+*/
 
-@media (prefers-reduced-motion: no-preference) {
-  .section {
-    animation: fadeIn 0.8s ease-out;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* Dla użytkowników z preferencją reduced motion (np. zaburzenia przedsionkowe) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    /* Wyłącz wszystkie animacje */
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 /* ========================================
-   SCROLL REVEAL ANIMATIONS
-   ======================================== */
+   PRINT STYLES
+   ======================================== 
+   
+   Style dla drukowania strony
+*/
 
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease-out;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger delay for skill cards */
-.skill-card.reveal:nth-child(1) { transition-delay: 0.1s; }
-.skill-card.reveal:nth-child(2) { transition-delay: 0.2s; }
-.skill-card.reveal:nth-child(3) { transition-delay: 0.3s; }
-
-/* Stagger delay for project cards */
-.project-card.reveal:nth-child(1) { transition-delay: 0.1s; }
-.project-card.reveal:nth-child(2) { transition-delay: 0.2s; }
-.project-card.reveal:nth-child(3) { transition-delay: 0.3s; }
-
-/* Print Styles */
 @media print {
+  /* Ukryj elementy niepotrzebne w druku */
   .nav,
+  .back-to-top,
   .hero-decoration {
     display: none;
   }
   
+  /* Usuń kolory tła */
   .section-alt {
     border: none;
     background: white;
@@ -968,4 +1167,53 @@ body {
     background: white;
     color: black;
   }
+  
+  .hero {
+    margin-top: 0;
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  
+  /* Zapobiegnij łamaniu kart między stronami */
+  .project-card,
+  .skill-card,
+  .certificate-card {
+    page-break-inside: avoid;
+  }
 }
+
+/* ========================================
+   JAK DODAWAĆ NOWE ELEMENTY?
+   ======================================== 
+
+   1. NOWA SEKCJA:
+   - Dodaj HTML z klasą .section lub .section-alt
+   - Użyj .section-header dla nagłówka
+   - Stylizuj specyficzną zawartość poniżej
+   
+   2. NOWA KARTA:
+   - Skopiuj strukturę np. .skill-card
+   - Zmień nazwę klasy (np. .testimonial-card)
+   - Dostosuj padding, border, hover
+   
+   3. NOWY BUTTON:
+   - Użyj podobnej struktury jak .tech-badge
+   - Dodaj transition: all var(--transition-base)
+   - Dodaj efekt :hover z transform
+   
+   4. NOWY KOLOR:
+   - Dodaj zmienną w :root (--color-twoja-nazwa)
+   - Użyj var(--color-twoja-nazwa) w stylach
+   
+   5. RESPONSIVE:
+   - Testuj na różnych rozmiarach
+   - Dodaj reguły w @media (max-width: 768px) jeśli potrzeba
+   - Używaj clamp() dla responsive font-size
+   
+   NAJLEPSZE PRAKTYKI:
+   - Używaj zmiennych CSS dla kolorów i spacingu
+   - Używaj flexbox/grid zamiast float
+   - Testuj accessibility (klawiszem Tab, screen reader)
+   - Dodawaj komentarze do skomplikowanych fragmentów
+   - Zachowaj spójność z istniejącym stylem
+*/

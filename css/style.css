@@ -204,7 +204,7 @@ body {
   /* Flexbox do centrowania zawartości */
   display: flex;
   align-items: center;             /* Wycentruj pionowo */
-  
+
   position: relative;              /* Dla absolutnie pozycjonowanej dekoracji */
   overflow: hidden;                /* Ukryj wystającą dekorację */
 }
@@ -393,13 +393,15 @@ body {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
 }
 
 .section-header {
   /* Nagłówek sekcji z tytułem i numerem */
   display: flex;
   justify-content: space-between;  /* Tytuł po lewej, numer po prawej */
-  align-items: baseline;           /* Wyrównaj do linii bazowej tekstu */
+  align-items: center;
   margin-bottom: var(--spacing-lg);
   position: relative;
 }
@@ -424,7 +426,7 @@ body {
    ======================================== */
 
 .about-content {
-  max-width: 1000px;  /* Ta sama szerokość co projects-grid */
+  max-width: 1200px;  /* Ta sama szerokość co projects-grid */
   margin: 0 auto;    /* Wyśrodkowanie */
 }
 
@@ -529,7 +531,7 @@ body {
   /* Prosty grid - jedna kolumna */
   display: grid;
   gap: var(--spacing-lg);
-  max-width: 1000px;  /* Limit the grid width */
+  max-width: 1200px;
   margin: 0 auto;    /* Center it */
 }
 
@@ -769,7 +771,7 @@ body {
 .experience-list {
   display: grid;
   gap: var(--spacing-md);
-  max-width: 1000px;  /* Ta sama szerokość co projects-grid */
+  max-width: 1200px;
   margin: 0 auto;    /* Wyśrodkowanie */
 }
 
@@ -801,6 +803,8 @@ body {
 .timeline {
   position: relative;
   padding-left: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Pionowa linia po lewej stronie */
